@@ -17,6 +17,7 @@ from openstack.dns.v2 import zone_export as _zone_export
 from openstack.dns.v2 import zone_import as _zone_import
 from openstack.dns.v2 import zone_share as _zone_share
 from openstack.dns.v2 import zone_transfer as _zone_transfer
+from openstack.dns.v2 import quota as _quota
 from openstack import proxy
 
 
@@ -655,6 +656,14 @@ class Proxy(proxy.Proxy):
             ignore_missing=ignore_missing,
             zone_id=zone_obj.id,
         )
+    # ======== Quotas ========
+
+    def quotas(self, **query):
+        return self._list(_quota.Quota, **query)
+
+    def get_quota(self, quota):
+        return self._get(_quota.Quota, quota)
+
 
     def _get_cleanup_dependencies(self):
         # DNS may depend on floating ip
