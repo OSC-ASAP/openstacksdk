@@ -17,6 +17,7 @@ from openstack.dns.v2 import zone_export as _zone_export
 from openstack.dns.v2 import zone_import as _zone_import
 from openstack.dns.v2 import zone_share as _zone_share
 from openstack.dns.v2 import zone_transfer as _zone_transfer
+from openstack.dns.v2 import service_status as _service_status
 from openstack import proxy
 
 
@@ -29,6 +30,7 @@ class Proxy(proxy.Proxy):
         "zone_import": _zone_import.ZoneImport,
         "zone_share": _zone_share.ZoneShare,
         "zone_transfer_request": _zone_transfer.ZoneTransferRequest,
+        "service_status": _service_status.ServiceStatus
     }
 
     # ======== Zones ========
@@ -655,6 +657,11 @@ class Proxy(proxy.Proxy):
             ignore_missing=ignore_missing,
             zone_id=zone_obj.id,
         )
+
+    def service_statuses(self, **query):
+        return self._list(_service_status.ServiceStatus, **query)
+    def get_service_status(self, service):
+        return self._get(_service_status.ServiceStatus, service)
 
     def _get_cleanup_dependencies(self):
         # DNS may depend on floating ip
