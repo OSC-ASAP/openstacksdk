@@ -12,12 +12,12 @@
 
 from openstack.dns.v2 import floating_ip as _fip
 from openstack.dns.v2 import recordset as _rs
+from openstack.dns.v2 import service_status as _svc_status
 from openstack.dns.v2 import zone as _zone
 from openstack.dns.v2 import zone_export as _zone_export
 from openstack.dns.v2 import zone_import as _zone_import
 from openstack.dns.v2 import zone_share as _zone_share
 from openstack.dns.v2 import zone_transfer as _zone_transfer
-from openstack.dns.v2 import service_status as _service_status
 from openstack import proxy
 
 
@@ -25,12 +25,12 @@ class Proxy(proxy.Proxy):
     _resource_registry = {
         "floating_ip": _fip.FloatingIP,
         "recordset": _rs.Recordset,
+        "service_status": _svc_status.ServiceStatus,
         "zone": _zone.Zone,
         "zone_export": _zone_export.ZoneExport,
         "zone_import": _zone_import.ZoneImport,
         "zone_share": _zone_share.ZoneShare,
         "zone_transfer_request": _zone_transfer.ZoneTransferRequest,
-        "service_status": _service_status.ServiceStatus
     }
 
     # ======== Zones ========
@@ -659,9 +659,10 @@ class Proxy(proxy.Proxy):
         )
 
     def service_statuses(self, **query):
-        return self._list(_service_status.ServiceStatus, **query)
+        return self._list(_svc_status.ServiceStatus, **query)
+
     def get_service_status(self, service):
-        return self._get(_service_status.ServiceStatus, service)
+        return self._get(_svc_status.ServiceStatus, service)
 
     def _get_cleanup_dependencies(self):
         # DNS may depend on floating ip
