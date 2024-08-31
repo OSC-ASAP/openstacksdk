@@ -658,8 +658,8 @@ class Proxy(proxy.Proxy):
             zone_id=zone_obj.id,
         )
 
-    def service_statuses(self, **query):
-        return self._list(_svc_status.ServiceStatus, **query)
+    def service_statuses(self):
+        return self._list(_svc_status.ServiceStatus)
 
     def get_service_status(self, service):
         return self._get(_svc_status.ServiceStatus, service)
