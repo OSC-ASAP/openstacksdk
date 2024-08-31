@@ -659,9 +659,22 @@ class Proxy(proxy.Proxy):
         )
 
     def service_statuses(self):
+        """Retrieve a generator of service statuses
+
+        :returns: A generator of service statuses
+            :class:`~openstack.dns.v2.service_status.ServiceStatus` instances.
+        """
         return self._list(_svc_status.ServiceStatus)
 
     def get_service_status(self, service):
+        """Get a status of a service in the Designate system
+
+        :param service: The value can be the ID of a service
+            or a :class:`~openstack.dns.v2.service_status.ServiceStatus` instance.
+
+        :returns: ServiceStatus instance.
+        :rtype: :class:`~openstack.dns.v2.service_status.ServiceStatus`
+        """
         return self._get(_svc_status.ServiceStatus, service)
 
     def _get_cleanup_dependencies(self):

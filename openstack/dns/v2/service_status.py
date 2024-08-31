@@ -31,22 +31,20 @@ class ServiceStatus(_base.Resource):
     capabilities = resource.Body('capabilities', type=dict)
     #: Timestamp when the resource was created
     created_at = resource.Body('created_at')
-    #: Timestamp when the last heartbeat was received.
+    #: Timestamp when the last heartbeat was received
     heartbeated_at = resource.Body('heartbeated_at')
     #: Hostname of the host with the service instance
     #: *Type: str*
     hostname = resource.Body('hostname')
-    #: Links to the resource, and other related resources. When a response has been broken into pages,
-    #: we will include a next link that should be followed to retrieve all results
+    #: Links contains a `self` pertaining to this service status or a `next` pertaining
+    #: to next page
     links = resource.Body('links', type=dict)
     #: The name of the Designate service instance
     #: *Type: str*
     service_name = resource.Body('service_name')
-    #: A list of service_statuses objects
-    service_statuses = resource.Body('service_statuses', type=list)
     #: Statistics for the service
     stats = resource.Body('stats', type=dict)
-    #: A list of service_statuses objects
+    #: The status of the resource
     #: *Type: enum*
     status = resource.Body('status')
     #: Timestamp when the resource was last updated
