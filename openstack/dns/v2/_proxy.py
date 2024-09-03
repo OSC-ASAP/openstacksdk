@@ -10,6 +10,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+from openstack.dns.v2 import blacklist as _blacklist
 from openstack.dns.v2 import floating_ip as _fip
 from openstack.dns.v2 import recordset as _rs
 from openstack.dns.v2 import zone as _zone
@@ -29,6 +30,7 @@ class Proxy(proxy.Proxy):
         "zone_import": _zone_import.ZoneImport,
         "zone_share": _zone_share.ZoneShare,
         "zone_transfer_request": _zone_transfer.ZoneTransferRequest,
+        "blacklist": _blacklist.BlackList
     }
 
     # ======== Zones ========
@@ -655,6 +657,65 @@ class Proxy(proxy.Proxy):
             ignore_missing=ignore_missing,
             zone_id=zone_obj.id,
         )
+
+    # ======== Blacklists ========
+    def blacklists(self):
+        """Retrieve a generator of blacklists
+
+        :returns: A generator of blacklist
+            :class:`~openstack.dns.v2.blacklist.Blacklist` instances.
+        """
+        return self._list(_blacklist.BlackList)
+
+    def get_blacklist(self, blacklist):
+        """Get a blacklist
+
+        :param blacklist: The value can be either the ID of a blacklist
+            or a :class `~openstack.dns.v2.blacklist.BlackiLst` instance.
+
+        :returns: Blacklist instance.
+        :rtype: :class:`~openstack.dns.v2.blacklist.BlackList`
+        """
+        return self._get(_blacklist.BlackList, blacklist)
+
+    def create_blacklist(self, **attrs):
+        """Create a new blacklist from attributes
+
+        :param dict attrs: Keyword arguments which will be used to create
+            a :class:`~openstack.dns.v2.blacklist.Blacklist`
+            comprised of the properties on the BlackList class.
+
+        :returns: The results of blacklist creation
+        :rtype: :class:`~openstack.dns.v2.blacklist.BlackList`
+        """
+        return self._create(_blacklist.BlackList, prepend_key=False, **attrs)
+
+    def update_blacklist(self, blacklist, **attrs):
+        """Update BlackList Request attributes
+
+        :param blacklist: The id or an instance of
+            :class:`~openstack.dns.v2.blacklist.BlackList`.
+        :param dict attrs: attributes for update on
+            :class:`~openstack.dns.v2.blacklist.BlackList`.
+
+        :rtype: :class:`~openstack.dns.v2.blacklist.BlackList`
+        """
+        return self._update(_blacklist.BlackList, blacklist, **attrs)
+
+    def delete_blacklist(self, blacklist, ignore_missing=True):
+        """Delete a zone share
+
+        :param blacklist: The id or an instance of
+            :class:`~openstack.dns.v2.blacklist.BlackList`.
+        :param bool ignore_missing: When set to ``False``
+            :class:`~openstack.exceptions.NotFoundException` will be raised when
+            the blacklist does not exist.
+            When set to ``True``, no exception will be set when attempting to
+            delete a nonexistent blacklist.
+
+        :returns: ``None``
+        """
+        return self._delete(_blacklist.BlackList, blacklist, ignore_missing=ignore_missing)
 
     def _get_cleanup_dependencies(self):
         # DNS may depend on floating ip

@@ -11,6 +11,7 @@
 # under the License.
 
 from openstack.dns.v2 import _proxy
+from openstack.dns.v2 import blacklist
 from openstack.dns.v2 import floating_ip
 from openstack.dns.v2 import recordset
 from openstack.dns.v2 import zone
@@ -311,3 +312,30 @@ class TestDnsZoneShare(TestDnsProxy):
             expected_args=[],
             expected_kwargs={'zone_id': 'zone'},
         )
+
+
+class TestDnsBlacklist(TestDnsProxy):
+    def test_blacklists(self):
+        self.verify_list(self.proxy.blacklists, blacklist.BlackList)
+
+    def test_dns_blacklist_create(self):
+        self.verify_create(
+            self.proxy.create_blacklist,
+            blacklist.Blacklist,
+            method_kwargs={'name': 'id'},
+            expected_kwargs={'name': 'id', 'prepend_key': False},
+        )
+
+    def test_dns_blacklist_delete(self):
+        self.verify_delete(
+            self.proxy.delete_blacklist,
+            blacklist.BlackList,
+            True,
+            expected_kwargs={'ignore_missing': True},
+        )
+
+    def test_dns_blacklist_get(self):
+        self.verify_get(self.proxy.get_blacklist, blacklist.BlackList)
+
+    def test_dns_blacklist_update(self):
+        self.verify_update(self.proxy.update_blacklist, blacklist.BlackList)
