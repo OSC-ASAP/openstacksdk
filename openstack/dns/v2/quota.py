@@ -35,6 +35,8 @@ class Quota(_base.Resource):
     recordset_records = resource.Body("recordset_records", type=int)
     #: The maximum amount of records allowed per zone. *Type: int*
     zone_records = resource.Body("zone_records", type=int)
+    #: The maximum amount of recordsets allowed per zone. *Type: int*
+    zone_recordsets = resource.Body("zone_recordsets", type=int)
     #: The maximum amount of zones allowed per project. *Type: int*
     zones = resource.Body("zones", type=int)
 

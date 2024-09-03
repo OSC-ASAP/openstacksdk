@@ -665,19 +665,19 @@ class Proxy(proxy.Proxy):
 
         :param dict query: Optional query parameters to be sent to limit the
             resources being returned.
-        
+
         :returns: A generator of quota objects
         :rtype: :class:`~openstack.dns.v2.quota.Quota`
         """
         return self._list(_quota.Quota, **query)
-    
+
     def get_quota(self, quota):
         """Get a quota
 
         :param quota: The value can be the ID of a quota or a
             :class:`~openstack.dns.v2.quota.Quota` instance.
             The ID of a quota is the same as the project ID for the quota.
-        
+
         :returns: One :class:`~openstack.dns.v2.quota.Quota`
         :raises: :class:`~openstack.exceptions.ResourceNotFound`
         """
@@ -691,7 +691,7 @@ class Proxy(proxy.Proxy):
             is the same as the project ID for the quota.
         :param dict attrs: The attributes to update on the quota represented
             by ``quota``.
-        
+
         :returns: The updated quota
         :rtype: :class:`~openstack.dns.v2.quota.Quota`
         """
@@ -708,7 +708,7 @@ class Proxy(proxy.Proxy):
             the quota does not exist.
             When set to ``True``, no exception will be set when attempting to
             delete a nonexistent quota.
-        
+
         :returns: ``None``
         """
         return self._delete(_quota.Quota, quota, ignore_missing=ignore_missing)
