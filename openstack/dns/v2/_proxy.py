@@ -23,6 +23,7 @@ from openstack import proxy
 
 class Proxy(proxy.Proxy):
     _resource_registry = {
+        "blacklist": _blacklist.BlackList,
         "floating_ip": _fip.FloatingIP,
         "recordset": _rs.Recordset,
         "zone": _zone.Zone,
@@ -30,7 +31,6 @@ class Proxy(proxy.Proxy):
         "zone_import": _zone_import.ZoneImport,
         "zone_share": _zone_share.ZoneShare,
         "zone_transfer_request": _zone_transfer.ZoneTransferRequest,
-        "blacklist": _blacklist.BlackList
     }
 
     # ======== Zones ========
@@ -715,7 +715,9 @@ class Proxy(proxy.Proxy):
 
         :returns: ``None``
         """
-        return self._delete(_blacklist.BlackList, blacklist, ignore_missing=ignore_missing)
+        return self._delete(
+            _blacklist.BlackList, blacklist, ignore_missing=ignore_missing
+        )
 
     def _get_cleanup_dependencies(self):
         # DNS may depend on floating ip

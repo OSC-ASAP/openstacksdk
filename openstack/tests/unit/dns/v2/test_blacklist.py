@@ -17,7 +17,7 @@ IDENTIFIER = 'af91edb5-ede8-453f-af13-feabdd088f9c'
 EXAMPLE = {
     'id': IDENTIFIER,
     'description': 'This is a blacklisted domain.',
-    'pattern': '^([A-Za-z0-9_\\-]+\\.)*example\\.com\\.$'
+    'pattern': '^([A-Za-z0-9_\\-]+\\.)*example\\.com\\.$',
 }
 
 
@@ -25,7 +25,7 @@ class TestBlacklist(base.TestCase):
     def test_basic(self):
         sot = blacklist.BlackList
         self.assertEqual(None, sot.resource_key)
-        self.assertEqual('blacklist', sot.resources_key)
+        self.assertEqual('blacklists', sot.resources_key)
         self.assertEqual('/blacklists', sot.base_path)
         self.assertTrue(sot.allow_create)
         self.assertTrue(sot.allow_fetch)

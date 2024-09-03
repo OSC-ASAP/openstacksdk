@@ -321,7 +321,7 @@ class TestDnsBlacklist(TestDnsProxy):
     def test_dns_blacklist_create(self):
         self.verify_create(
             self.proxy.create_blacklist,
-            blacklist.Blacklist,
+            blacklist.BlackList,
             method_kwargs={'name': 'id'},
             expected_kwargs={'name': 'id', 'prepend_key': False},
         )
