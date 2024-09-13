@@ -31,8 +31,14 @@ class BlackList(_base.Resource):
 
     #: Properties
     #: Blacklist description
+    #: Timestamp when the blacklist was created
+    created_at = resource.Body('created_at')
     #: *Type: str*
     description = resource.Body('description')
-
+    #: Links contains a `self` pertaining to this blacklist or a `next` pertaining
+    #: to next page
+    links = resource.Body('links', type=dict)
     # Pattern for this blacklist
     pattern = resource.Body('pattern')
+    #: Timestamp when the blacklist was last updated
+    updated_at = resource.Body('updated_at')
