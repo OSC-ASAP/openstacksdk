@@ -38,5 +38,8 @@ class TestBlacklist(base.TestCase):
     def test_make_it(self):
         sot = blacklist.BlackList(**EXAMPLE)
         self.assertEqual(IDENTIFIER, sot.id)
+        self.assertEqual(EXAMPLE['created_at'], sot.created_at)
         self.assertEqual(EXAMPLE['description'], sot.description)
+        self.assertEqual(EXAMPLE['links'], sot.links)
         self.assertEqual(EXAMPLE['pattern'], sot.pattern)
+        self.assertEqual(EXAMPLE['updated_at'], sot.updated_at)
